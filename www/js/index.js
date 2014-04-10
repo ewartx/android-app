@@ -34,6 +34,14 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         // app.receivedEvent('deviceready');
+        var img = $("<img />").attr('src', 'http://images.drivebc.ca/bchighwaycam/pub/cameras/66.jpg')
+            .load(function() {
+                if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth == 0) {
+                    alert('broken image!');
+                } else {
+                    $(".view").empty().append(img);
+                }
+            });
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
