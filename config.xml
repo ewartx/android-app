@@ -9,4 +9,10 @@
     </author>
     <content src="index.html" />
     <access origin="*" />
+
+    <!-- Plugins Information -->
+    <gap:plugin name="Geolocation" value="org.apache.cordova.core.GeoBroker" />
+
+    <gap:plugin name="Notification" value="org.apache.cordova.core.Notification" />
+    <gap:plugin name="Vibration" value="org.apache.cordova.core.Vibration" />
 </widget>
