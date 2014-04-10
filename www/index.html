@@ -42,6 +42,14 @@
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
+            var img = $("<img />").attr('src', 'http://images.drivebc.ca/bchighwaycam/pub/cameras/66.jpg')
+                .load(function() {
+                    if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth == 0) {
+                        alert('broken image!');
+                    } else {
+                        $(".view").empty().append(img);
+                    }
+                });
         </script>
     </body>
 </html>
