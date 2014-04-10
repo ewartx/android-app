@@ -34,6 +34,19 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         // app.receivedEvent('deviceready');
+        navigator.geolocation.getCurrentPosition(this.onGetLocation);
+    },
+    onGetLocation: function(position) {
+        var latitude = position.coords.latitude ;
+        var longitude = position.coords.longitude;
+
+        var mapOptions = {
+          center: new google.maps.LatLng(latitude, longitude),
+          zoom: 12,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map_canvas"),
+            mapOptions);
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
