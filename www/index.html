@@ -36,20 +36,15 @@
             </div> -->
         <!-- </div> -->
         <div class='view'>
-            
+            <img src='http://images.drivebc.ca/bchighwaycam/pub/cameras/66.jpg' data-src='http://images.drivebc.ca/bchighwaycam/pub/cameras/66.jpg' />
         </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
-            var img = $("<img />").attr('src', 'http://images.drivebc.ca/bchighwaycam/pub/cameras/66.jpg')
-                .load(function() {
-                    if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth == 0) {
-                        alert('broken image!');
-                    } else {
-                        $(".view").empty().append(img);
-                    }
-                });
+            var src = $(".view img").data("src");
+            var time = new Date().getTime();
+            $(".view img").attr("src", src + "?"+time);
         </script>
     </body>
 </html>
