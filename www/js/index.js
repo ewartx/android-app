@@ -38,7 +38,19 @@ var app = {
             $(".app").hide();
             $(".content").show();
         }, 750);
+        navigator.geolocation.getCurrentPosition(this.geolocation);
     },
+    geolocation: function(position) {
+        $("#position").text(position.coords.latitude);
+        // alert('Latitude: '          + position.coords.latitude          + '\n' +
+        //         'Longitude: '         + position.coords.longitude         + '\n' +
+        //         'Altitude: '          + position.coords.altitude          + '\n' +
+        //         'Accuracy: '          + position.coords.accuracy          + '\n' +
+        //         'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+        //         'Heading: '           + position.coords.heading           + '\n' +
+        //         'Speed: '             + position.coords.speed             + '\n' +
+        //         'Timestamp: '         + position.timestamp                + '\n');
+    },  
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         var parentElement = document.getElementById(id);
