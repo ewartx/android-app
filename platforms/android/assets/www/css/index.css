@@ -81,23 +81,29 @@ body {
 #trafficCams .block {
     display: inline-block;
     float: left;
-    margin: 0 10px;
+    margin: 5px 10px;
     border: 10px solid #fff;
-      border-bottom: 45px solid #fff;
       -webkit-box-shadow: 3px 3px 3px #777;
          -moz-box-shadow: 3px 3px 3px #777;
               box-shadow: 3px 3px 3px #777;
     position: relative;
-    width: 463px;
+    width: 926px;
 }
 
 #trafficCams .block p {
     position: absolute;
     text-align: center;
     width: 100%;
-    bottom: -47px;
-    font: 400 18px/1 'Kaushan Script', cursive;
-    color: #000;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.83);    
+    padding: 5px 0;
+    top: -20px;
+    font-size: 25px;
+}
+
+#trafficCams .block img {
+    width: 926px;
+    height: 598px;
 }
 
 h1 {

@@ -33,33 +33,47 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        app.receivedEvent('deviceready');
         window.setTimeout(function() {
             $(".app").hide();
             $(".content").show();
         }, 750);
-        navigator.geolocation.getCurrentPosition(this.geolocation);
+
+       navigator.geolocation.getCurrentPosition(app.onSuccess, app.onError, { maximumAge: 3000, timeout: 5000, enableHighAccuracy: true });
+
+        // function onSuccess(position) {
+        //     var element = document.getElementById('geolocation');
+        //     element.innerHTML = 'Latitude: ' + position.coords.latitude + '<br />' +
+        //                     'Longitude: ' + position.coords.longitude + '<br />' +
+        //                     'Altitude: ' + position.coords.altitude + '<br />' +
+        //                     'Accuracy: ' + position.coords.accuracy + '<br />' +
+        //                     'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '<br />' +
+        //                     'Heading: ' + position.coords.heading + '<br />' +
+        //                     'Speed: ' + position.coords.speed + '<br />' +
+        //                     'Timestamp: ' + position.timestamp + '<br />';
+        // }        
     },
-    geolocation: function(position) {
-        $("#position").text(position.coords.latitude);
-        // alert('Latitude: '          + position.coords.latitude          + '\n' +
-        //         'Longitude: '         + position.coords.longitude         + '\n' +
-        //         'Altitude: '          + position.coords.altitude          + '\n' +
-        //         'Accuracy: '          + position.coords.accuracy          + '\n' +
-        //         'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-        //         'Heading: '           + position.coords.heading           + '\n' +
-        //         'Speed: '             + position.coords.speed             + '\n' +
-        //         'Timestamp: '         + position.timestamp                + '\n');
-    },  
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+    // Current location was found
+    // show the map
+    onSuccess: function(position) {
+        var longitude = position.coords.longitude;
+        var latitude = position.coords.latitude;
+        var latLong = new google.maps.LatLng(latitude, longitude);
 
-        console.log('Received Event: ' + id);
+        var mapOptions = {
+            center: latLong,
+            zoom: 16,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        var map = new google.maps.Map(document.getElementById("geolocation"), mapOptions);
+    },
+    onError: function(error) {
+        navigator.notification.alert(
+            'message: ' + error.message,    // message
+            null,       // callback
+            'code: ' + error.code, // title
+            'OK'        // buttonName
+        );
     }
 };
